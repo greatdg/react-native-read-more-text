@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   Text,
@@ -67,13 +68,18 @@ export default class ReadMore extends React.Component {
       showAllText,
     } = this.state;
 
+		let {
+			truncatedStyle,
+			revealedStyle,
+		} = this.props;
+
     if (shouldShowReadMore && !showAllText) {
       if (this.props.renderTruncatedFooter) {
         return this.props.renderTruncatedFooter(this._handlePressReadMore);
       }
 
       return (
-        <Text style={styles.button} onPress={this._handlePressReadMore}>
+        <Text style={[styles.button, truncatedStyle]} onPress={this._handlePressReadMore}>
           Read more
         </Text>
       )
@@ -83,7 +89,7 @@ export default class ReadMore extends React.Component {
       }
 
       return (
-        <Text style={styles.button} onPress={this._handlePressReadLess}>
+        <Text style={[styles.button, revealedStyle]} onPress={this._handlePressReadLess}>
           Hide
         </Text>
       );
@@ -109,3 +115,8 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
 });
+
+ReadMore.defaultProps = {
+  truncatedStyle: {},
+  revealedStyle: {},
+};
