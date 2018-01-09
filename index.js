@@ -45,7 +45,9 @@ export default class ReadMore extends React.Component {
       <View>
         <Text
           numberOfLines={measured && !showAllText ? numberOfLines : 0}
-          ref={text => { this._text = text; }}>
+          ref={text => { this._text = text; }}
+          onPress={this._handlePressReadToggle}
+        >
           {this.props.children}
         </Text>
 
@@ -53,6 +55,15 @@ export default class ReadMore extends React.Component {
       </View>
     );
   }
+
+	_handlePressReadToggle = () => {
+		let {
+      showAllText,
+    } = this.state;
+
+    this.setState({showAllText: !showAllText});
+  }
+
 
   _handlePressReadMore = () => {
     this.setState({showAllText: true});
