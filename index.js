@@ -35,6 +35,7 @@ export default class ReadMore extends React.Component {
     let {
       measured,
       showAllText,
+      shouldShowReadMore,
     } = this.state;
 
     let {
@@ -42,7 +43,11 @@ export default class ReadMore extends React.Component {
     } = this.props;
 
     return (
-      <View>
+      <View
+        style={{
+          opacity: !measured && !shouldShowReadMore ? 0 : 1,
+        }}
+      >
         <Text
           numberOfLines={measured && !showAllText ? numberOfLines : 0}
           ref={text => { this._text = text; }}
@@ -123,7 +128,7 @@ function nextFrameAsync() {
 const styles = StyleSheet.create({
   button: {
     color: '#888',
-    marginTop: 5,
+    marginTop: 7,
   },
 });
 
